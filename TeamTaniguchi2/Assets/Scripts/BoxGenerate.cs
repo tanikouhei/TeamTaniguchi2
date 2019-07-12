@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BoxGenerate : MonoBehaviour
 {
-    public GameObject[] box = new GameObject[5];
-    int[] tableBoxTest = { 1, 1, 1, 1, 1, 1, 1, 1 };
+    public GameObject[] box = new GameObject[5];//ボックス
+    //テーブル
     int[] tableBox01 = { 1, 0, 2, 0, 0, 1, 2, 0 };
     int[] tableBox02 = { 0, 1, 1, 0, 2, 0, 0, 1 };
     int[] tableBox03 = { 1, 0, 1, 2, 0, 0, 1, 1 };
@@ -21,7 +21,7 @@ public class BoxGenerate : MonoBehaviour
     int[] tableBox13 = { 4, 0, 0, 0, 0, 1, 0, 1 };
     int[] tableBox14 = { 0, 2, 0, 4, 0, 0, 0, 0 };
     int[] tableBox15 = { 5, 0, 0, 0, 0, 0, 0, 1 };
-    int[] tbn;
+    int[] tbn;//テーブルのコピー
     float[] scale_x = { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f };//大きさ
     const float scale_y = 1.0f;
     const float scale_z = 1.0f;
@@ -31,24 +31,64 @@ public class BoxGenerate : MonoBehaviour
     {
         for(int i = 0; i < 5; i++)//ボックスの型(1～5の大きさ)
         {
-            box[i] = (GameObject)Resources.Load("Box" + (i + 1));
-            box[i].transform.localScale = new Vector3(scale_x[i], scale_y, scale_z);
+            box[i] = (GameObject)Resources.Load("Box" + (i + 1));//ボックスの型を読み込んで番号をつける
+            box[i].transform.localScale = new Vector3(scale_x[i], scale_y, scale_z);//ボックスの大きさ
         }
         GenerateStart(0);//最初
     }
 	
-	// Update is called once per frame
-	void Update ()
+    public void GenerateStart(int now)//生成開始
     {
-	}
-    
-    void GenerateStart(int now)//生成開始
-    {    
-        int rnd = Random.Range(1,16);//呼び出すテーブル
         float position_x = 0.0f;
         float position_y = 0.0f;
-        Debug.Log(rnd);
+        int maxLoop = 1;//何段積むか
 
+        if(now == 0)//最初又は全部消えたら3段積む
+        {
+            maxLoop = 3;
+        } 
+        else       //それ以外は1段
+        {
+            maxLoop = 1;
+        }  
+         
+        for (int i = 0; i < maxLoop; i++)
+        {
+            SetTable();
+
+            for (int j = 0; j < 8; j++)//マイナス１になったらテーブル終了
+            {
+                switch (tbn[j])
+                {
+                    case 0://ゼロは空白だから何もしない
+                        break;
+                    case 1:
+                        Instantiate(box[0], new Vector3(position_x, position_y, 0), Quaternion.identity);
+                        break;
+                    case 2:
+                        Instantiate(box[1], new Vector3(position_x, position_y, 0), Quaternion.identity);
+                        break;
+                    case 3:
+                        Instantiate(box[2], new Vector3(position_x, position_y, 0), Quaternion.identity);
+                        break;
+                    case 4:
+                        Instantiate(box[3], new Vector3(position_x, position_y, 0), Quaternion.identity);
+                        break;
+                    case 5:
+                        Instantiate(box[4], new Vector3(position_x, position_y, 0), Quaternion.identity);
+                        break;
+                }
+                position_x += 0.13f;
+            }
+            position_x = 0.0f;
+            position_y += 0.13f;
+        }
+    }
+
+    void SetTable()//テーブルをランダムで読み込む
+    {
+        int rnd = Random.Range(1, 16);//呼び出すテーブル
+        Debug.Log(rnd);
         switch (rnd)
         {
             case 1:
@@ -96,33 +136,6 @@ public class BoxGenerate : MonoBehaviour
             case 15:
                 tbn = tableBox15;
                 break;
-        }
-        //tbn = tableBoxTest;
-
-        for (int i = 0; i < 8; i++)//マイナス１になったらテーブル終了
-        {
-
-            switch (tbn[i])
-            {
-                case 0://ゼロは空白だから何もしない
-                    break;
-                case 1:
-                    Instantiate(box[0], new Vector3(position_x, position_y, 0), Quaternion.identity);
-                    break;
-                case 2:
-                    Instantiate(box[1], new Vector3(position_x, position_y, 0), Quaternion.identity);
-                    break;
-                case 3:
-                    Instantiate(box[2], new Vector3(position_x, position_y, 0), Quaternion.identity);
-                    break;
-                case 4:
-                    Instantiate(box[3], new Vector3(position_x, position_y, 0), Quaternion.identity);
-                    break;
-                case 5:
-                    Instantiate(box[4], new Vector3(position_x, position_y, 0), Quaternion.identity);
-                    break;
-            }
-            position_x += 0.13f;
         }
     }
 }
