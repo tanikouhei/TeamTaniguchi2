@@ -23,25 +23,25 @@ public class SceneChange : MonoBehaviour
         SceneManager.LoadScene("Title");
     }
 
-    public void OnRetryMenu()
+    public void OnRetrySelect()
     {
         // 「ButtonScene」を自分の読み込みたいscene名に変える
         SceneManager.LoadScene("Select");
     }
 
-    public void OnRetryChoiceStage()
+    public void OnRetryRule()
     {
         // 「ButtonScene」を自分の読み込みたいscene名に変える
         SceneManager.LoadScene("Rule");
     }
 
-    public void OnRetryCollection()
+    public void OnRetryStage()
     {
         // 「ButtonScene」を自分の読み込みたいscene名に変える
         SceneManager.LoadScene("Stage");
     }
 
-    public void OnRetrySetumei()
+    public void OnRetryResult()
     {
         // 「ButtonScene」を自分の読み込みたいscene名に変える
         SceneManager.LoadScene("Result");
