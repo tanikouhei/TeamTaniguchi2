@@ -52,7 +52,7 @@ public class SceneChange : MonoBehaviour
 #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
 #elif UNITY_STANDALONE
-      Application.Quit();
+      Application.Quit(); 
 #endif
     }
 }
