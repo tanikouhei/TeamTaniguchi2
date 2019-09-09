@@ -16,14 +16,14 @@ public class BoxController : MonoBehaviour
         gm = GameObject.Find("GameManager");
         bm = gm.GetComponent<BoxManager>();
         no = bm.SetNoCount();
-        pos = transform.position;
     }
 
     void Update()
     {
+        pos = transform.position;
         if (bm.GetPlaceUp())//個別に止めるために
         {
-            pos.y += 0.13f;
+            pos.y += 0.71f;
             transform.position = pos;
 
             if(no == bm.GetNoCount())//番号が最後のGameObjectまで来たらfalseにして止める

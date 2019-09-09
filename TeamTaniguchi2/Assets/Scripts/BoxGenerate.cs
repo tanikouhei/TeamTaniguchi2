@@ -22,9 +22,9 @@ public class BoxGenerate : MonoBehaviour
     int[] tableBox14 = { 0, 2, 0, 4, 0, 0, 0, 0 };
     int[] tableBox15 = { 5, 0, 0, 0, 0, 0, 0, 1 };
     int[] tbn;//テーブルのコピー
-    float[] scale_x = { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f };//大きさ
-    const float scale_y = 1.0f;
-    const float scale_z = 1.0f;
+    float scale_x = 1.0f;
+    float scale_y = 1.0f;
+    float scale_z = 1.0f;
 
 	// Use this for initialization
 	void Start ()
@@ -32,15 +32,15 @@ public class BoxGenerate : MonoBehaviour
         for(int i = 0; i < 5; i++)//ボックスの型(1～5の大きさ)
         {
             box[i] = (GameObject)Resources.Load("Box" + (i + 1));//ボックスの型を読み込んで番号をつける
-            box[i].transform.localScale = new Vector3(scale_x[i], scale_y, scale_z);//ボックスの大きさ
+            box[i].transform.localScale = new Vector3(scale_x, scale_y, scale_z);//ボックスの大きさ
         }
         GenerateStart(0);//最初
     }
 	
     public void GenerateStart(int now)//生成開始
     {
-        float position_x = 0.0f;
-        float position_y = 0.0f;
+        float position_x = -2.45f;
+        float position_y = -2.5f;
         int maxLoop = 1;//何段積むか
 
         if(now == 0)//最初又は全部消えたら3段積む
@@ -66,22 +66,22 @@ public class BoxGenerate : MonoBehaviour
                         Instantiate(box[0], new Vector3(position_x, position_y, 0), Quaternion.identity);
                         break;
                     case 2:
-                        Instantiate(box[1], new Vector3(position_x, position_y, 0), Quaternion.identity);
+                        Instantiate(box[1], new Vector3(position_x + 0.35f, position_y, 0), Quaternion.identity);
                         break;
                     case 3:
-                        Instantiate(box[2], new Vector3(position_x, position_y, 0), Quaternion.identity);
+                        Instantiate(box[2], new Vector3(position_x + 0.68f, position_y, 0), Quaternion.identity);
                         break;
                     case 4:
-                        Instantiate(box[3], new Vector3(position_x, position_y, 0), Quaternion.identity);
+                        Instantiate(box[3], new Vector3(position_x + 1.04f, position_y, 0), Quaternion.identity);
                         break;
                     case 5:
-                        Instantiate(box[4], new Vector3(position_x, position_y, 0), Quaternion.identity);
+                        Instantiate(box[4], new Vector3(position_x + 1.4f, position_y, 0), Quaternion.identity);
                         break;
                 }
-                position_x += 0.13f;
+                position_x += 0.7f;
             }
-            position_x = 0.0f;
-            position_y += 0.13f;
+            position_x = -2.45f;
+            position_y += 0.71f;
         }
     }
 
