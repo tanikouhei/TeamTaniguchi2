@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoxGenerate : MonoBehaviour
 {
-    public GameObject[] box = new GameObject[5];//ボックス
+    GameObject[] box = new GameObject[5];//ボックス
     //テーブル
     int[] tableBox01 = { 1, 0, 2, 0, 0, 1, 2, 0 };
     int[] tableBox02 = { 0, 1, 1, 0, 2, 0, 0, 1 };
@@ -88,7 +88,7 @@ public class BoxGenerate : MonoBehaviour
     void SetTable()//テーブルをランダムで読み込む
     {
         int rnd = Random.Range(1, 16);//呼び出すテーブル
-        Debug.Log(rnd);
+        Debug.Log(rnd + "テーブル");
         switch (rnd)
         {
             case 1:
