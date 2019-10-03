@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 114959940592341380}
   - component: {fileID: 61825627391212664}
   - component: {fileID: 50133311191519276}
+  - component: {fileID: 114757196389132090}
   m_Layer: 0
   m_Name: Box4
-  m_TagString: BoxTag
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,12 +58,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!61 &61825627391212664
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -75,10 +76,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 1.05, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.125, y: 0.5}
     oldSize: {x: 2.8421052, y: 0.7105263}
     newSize: {x: 0.2, y: 0.5}
     adaptiveTilingThreshold: 0.5
@@ -88,6 +89,53 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.7, y: 0.7}
   m_EdgeRadius: 0
+--- !u!114 &114757196389132090
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1022602155944858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114959940592341380}
+          m_MethodName: PointerDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114959940592341380}
+          m_MethodName: PointerUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!114 &114959940592341380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 324fd05300f8f1340b34ff279c6a3ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  no: 0
 --- !u!212 &212748850275700368
 SpriteRenderer:
   m_ObjectHideFlags: 1

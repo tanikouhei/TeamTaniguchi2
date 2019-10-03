@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RayController : MonoBehaviour
 {
+    /*
     public LayerMask mask;
 
     void Ray()
@@ -29,4 +30,5 @@ public class RayController : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction, Color.red, 3.0f);
 
     }
+    */
 }

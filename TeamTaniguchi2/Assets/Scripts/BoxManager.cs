@@ -16,6 +16,7 @@ public class BoxManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        //Time.timeScale = 0.2f;
         for (int i = 0; i < 8; i++)
         {
             bc[i] = Lines[i].GetComponent<BoxComplete>();
@@ -31,10 +32,15 @@ public class BoxManager : MonoBehaviour
         if (!go.gameOverNow())
         {
             timeCount++;
-            if (timeCount % 120 == 0)
+
+            if (timeCount % 60 == 0)
+            {
+                Reset();
+            }
+
+                if (timeCount % 180 == 0)
             {
                 newGenerate();
-                Reset();
             }
         }
 	}
@@ -74,6 +80,5 @@ public class BoxManager : MonoBehaviour
         if (placeUp) placeUp = false;
         else placeUp = true;
         return placeUp;
-    }
-    
+    }    
 }
