@@ -12,7 +12,8 @@ public class BoxController : MonoBehaviour
     Rigidbody2D rb2d;
     public int no = 0;
     int boxSize = 0;
-    bool placeUp = false;//一個ずつ上昇
+    float difference = 0.0f;//差
+    //bool placeUp = false;//一個ずつ上昇
     bool stop = false;
     bool move = false;//移動中かどうか
     bool comp = false;//揃ったかどうか
@@ -49,20 +50,22 @@ public class BoxController : MonoBehaviour
 
     void Update()
     {       
+        /*
         if (bm.GetPlaceUp())//個別に止めるために
         {
             pos.y += 0.71f;
             transform.position = pos;
             stop = false;//動く
-            //send = false;//ここで送ったものをリセット
             move = false;//強制的に解除
-
+            Debug.Log("呼ばれました" + no);
             if (no == bm.GetNoCount())//番号が最後のGameObjectまで来たらfalseにして止める
             {
-                bm.SetPlaceUp();
+                bm.placeUpFalse();
             }
         }
         else if (move)
+        */
+        if(move)
         {
             movePosition();
         }
@@ -92,6 +95,7 @@ public class BoxController : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 10;
         moveTo = Camera.main.ScreenToWorldPoint(mousePos);
+        Debug.Log(mousePos);
         Debug.Log(Camera.main.ScreenToWorldPoint(mousePos));
 
         pos.x = moveTo.x;//X方向だけ動かしすため
@@ -132,6 +136,15 @@ public class BoxController : MonoBehaviour
         comp = false;
     }
 
+    public void placeUp()
+    {
+        pos.y += 0.71f;
+        transform.position = pos;
+        stop = false;//動く
+        move = false;//強制的に解除
+        Debug.Log("呼ばれました" + no);
+    }
+
     public void Die(int a)
     {
         Destroy(gameObject,a);
@@ -143,7 +156,7 @@ public class BoxController : MonoBehaviour
         Debug.Log("クリックされました");
     }
 
-    public void PointerUp()//クリックされたら
+    public void PointerUp()//離したら
     {
         move = false;
         Debug.Log("離しました");

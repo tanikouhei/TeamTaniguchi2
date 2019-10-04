@@ -11,7 +11,7 @@ public class BoxManager : MonoBehaviour
     GameOver go;
     int timeCount = 0;//(仮)
     int noCount = 0;
-    bool placeUp = false;
+    //bool placeUp = false;
 
     // Use this for initialization
     void Start ()
@@ -38,7 +38,6 @@ public class BoxManager : MonoBehaviour
                 if (bc[i].resetAllNow())
                 {
                     Reset();
-                    Debug.LogError("リセットします");
                     break;
                 }
             }
@@ -52,7 +51,11 @@ public class BoxManager : MonoBehaviour
 
     void newGenerate()
     {
-        placeUp = true;
+        //placeUp = true;
+        for(int i = 0; i < 8; i++)
+        {
+            bc[7 - i].SetPlaceUp();
+        }
         bg.GenerateStart(1);//ボックスを生成する処理を呼び出す(1)
     }
     
@@ -74,16 +77,15 @@ public class BoxManager : MonoBehaviour
     {
         return noCount;
     }
-
+}
+    /*
     public bool GetPlaceUp()
     {
         return placeUp;
     }
 
-    public bool SetPlaceUp()//boolをチェンジ
+    public void placeUpFalse()//placeをチェンジ
     {
-        if (placeUp) placeUp = false;
-        else placeUp = true;
-        return placeUp;
+        placeUp = false;
     }    
-}
+    */
