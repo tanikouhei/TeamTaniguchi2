@@ -28,7 +28,7 @@ public class BoxComplete : MonoBehaviour
 
     void Update()
     {
-        if (reset && boxSizeCnt <= 0)
+        if (reset)// && boxSizeCnt <= 0)
         {
             /*
             for (int i = 0; i < 8; i++)
@@ -130,6 +130,7 @@ public class BoxComplete : MonoBehaviour
                     boxSize[7] = bc.SetBoxSize();
                     bcClone[7] = bc;
                 }
+                bc.compTrue();
                 /*
                 switch (other.gameObject.name.Substring(0, 4))
                 {
@@ -210,8 +211,8 @@ public class BoxComplete : MonoBehaviour
                 boxSize[7] = 0;
             }
             */
-            boxSizeCnt -= bc.SetBoxSize();
-            bc.compTrue();
+            //boxSizeCnt -= bc.SetBoxSize();
+            //bc.compTrue();
             //boxSizeCnt = boxSize[0] + boxSize[1] + boxSize[2] + boxSize[3] + boxSize[4] + boxSize[5] + boxSize[6] + boxSize[7];
             //bc.Die(1);
             /*
