@@ -33,12 +33,17 @@ public class BoxManager : MonoBehaviour
         {
             timeCount++;
 
-            if (timeCount % 60 == 0)
+            for(int i = 0; i < 8; i++)
             {
-                Reset();
+                if (bc[i].resetAllNow())
+                {
+                    Reset();
+                    Debug.LogError("リセットします");
+                    break;
+                }
             }
 
-                if (timeCount % 180 == 0)
+            if (timeCount % 180 == 0)
             {
                 newGenerate();
             }

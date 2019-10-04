@@ -16,7 +16,6 @@ public class BoxController : MonoBehaviour
     bool stop = false;
     bool move = false;//移動中かどうか
     bool comp = false;//揃ったかどうか
-    bool dead = false;//デストロイの判定に使う
     //bool send = false;
 
     // Use this for initialization
@@ -49,12 +48,7 @@ public class BoxController : MonoBehaviour
     }
 
     void Update()
-    {        
-        if (dead)
-        {
-            Destroy(gameObject);
-        }
-
+    {       
         if (bm.GetPlaceUp())//個別に止めるために
         {
             pos.y += 0.71f;
@@ -133,9 +127,9 @@ public class BoxController : MonoBehaviour
     {
         comp = true;
     }
-    public void deadTrue()
+    public void compFlase()
     {
-        dead = true;
+        comp = false;
     }
 
     public void Die(int a)
