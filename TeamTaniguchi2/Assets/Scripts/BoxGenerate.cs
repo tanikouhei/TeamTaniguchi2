@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoxGenerate : MonoBehaviour
 {
-    public GameObject[] box = new GameObject[5];//ボックス
+    GameObject[] box = new GameObject[5];//ボックス
     //テーブル
     int[] tableBox01 = { 1, 0, 2, 0, 0, 1, 2, 0 };
     int[] tableBox02 = { 0, 1, 1, 0, 2, 0, 0, 1 };
@@ -66,16 +66,16 @@ public class BoxGenerate : MonoBehaviour
                         Instantiate(box[0], new Vector3(position_x, position_y, 0), Quaternion.identity);
                         break;
                     case 2:
-                        Instantiate(box[1], new Vector3(position_x + 0.35f, position_y, 0), Quaternion.identity);
+                        Instantiate(box[1], new Vector3(position_x, position_y, 0), Quaternion.identity);
                         break;
                     case 3:
-                        Instantiate(box[2], new Vector3(position_x + 0.68f, position_y, 0), Quaternion.identity);
+                        Instantiate(box[2], new Vector3(position_x, position_y, 0), Quaternion.identity);
                         break;
                     case 4:
-                        Instantiate(box[3], new Vector3(position_x + 1.04f, position_y, 0), Quaternion.identity);
+                        Instantiate(box[3], new Vector3(position_x, position_y, 0), Quaternion.identity);
                         break;
                     case 5:
-                        Instantiate(box[4], new Vector3(position_x + 1.4f, position_y, 0), Quaternion.identity);
+                        Instantiate(box[4], new Vector3(position_x, position_y, 0), Quaternion.identity);
                         break;
                 }
                 position_x += 0.7f;
@@ -88,7 +88,7 @@ public class BoxGenerate : MonoBehaviour
     void SetTable()//テーブルをランダムで読み込む
     {
         int rnd = Random.Range(1, 16);//呼び出すテーブル
-        Debug.Log(rnd);
+        //Debug.Log(rnd + "テーブル");
         switch (rnd)
         {
             case 1:

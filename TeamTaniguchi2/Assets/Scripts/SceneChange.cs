@@ -49,10 +49,10 @@ public class SceneChange : MonoBehaviour
 
     public void EndGame()
     {
-#if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-      Application.Quit(); 
-#endif
+        #if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+        #elif UNITY_STANDALONE
+            Application.Quit(); 
+        #endif
     }
 }

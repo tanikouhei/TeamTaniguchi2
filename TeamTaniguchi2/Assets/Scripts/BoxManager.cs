@@ -4,32 +4,59 @@ using UnityEngine;
 
 public class BoxManager : MonoBehaviour
 {
+    GameObject obj;
+    public GameObject[] Lines = new GameObject[8];
+    BoxComplete[] bc = new BoxComplete[8];
     BoxGenerate bg;
-    int count = 0;
+    GameOver go;
+    int timeCount = 0;//(仮)
     int noCount = 0;
     bool placeUp = false;
 
     // Use this for initialization
     void Start ()
     {
-        bg = GetComponent<BoxGenerate>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        count++;
-        Debug.Log(count);
-        if(count % 120 == 0)
+        //Time.timeScale = 0.2f;
+        for (int i = 0; i < 8; i++)
         {
-            NewGenerate();
+            bc[i] = Lines[i].GetComponent<BoxComplete>();
+        }
+        bg = GetComponent<BoxGenerate>();
+        obj = GameObject.Find("TopBlock");
+        go = obj.GetComponent<GameOver>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!go.gameOverNow())
+        {
+            timeCount++;
+
+            if (timeCount % 60 == 0)
+            {
+                Reset();
+            }
+
+                if (timeCount % 180 == 0)
+            {
+                newGenerate();
+            }
         }
 	}
 
-    void NewGenerate()
+    void newGenerate()
     {
         placeUp = true;
         bg.GenerateStart(1);//ボックスを生成する処理を呼び出す(1)
+    }
+    
+    void Reset()
+    {
+        for(int i = 0; i < 8; i++)
+        {
+            bc[i].boxReset();
+        }
     }    
 
     public int SetNoCount()
@@ -53,5 +80,5 @@ public class BoxManager : MonoBehaviour
         if (placeUp) placeUp = false;
         else placeUp = true;
         return placeUp;
-    }
+    }    
 }
