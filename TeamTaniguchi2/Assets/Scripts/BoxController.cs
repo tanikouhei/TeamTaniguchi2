@@ -12,12 +12,11 @@ public class BoxController : MonoBehaviour
     Rigidbody2D rb2d;
     public int no = 0;
     int boxSize = 0;
-    float difference = 0.0f;//差
     //bool placeUp = false;//一個ずつ上昇
     bool stop = false;
     bool move = false;//移動中かどうか
     bool comp = false;//揃ったかどうか
-    //bool send = false;
+    bool distant = false;//離れたかどうか
 
     // Use this for initialization
     void Start()
@@ -49,22 +48,7 @@ public class BoxController : MonoBehaviour
     }
 
     void Update()
-    {       
-        /*
-        if (bm.GetPlaceUp())//個別に止めるために
-        {
-            pos.y += 0.71f;
-            transform.position = pos;
-            stop = false;//動く
-            move = false;//強制的に解除
-            Debug.Log("呼ばれました" + no);
-            if (no == bm.GetNoCount())//番号が最後のGameObjectまで来たらfalseにして止める
-            {
-                bm.placeUpFalse();
-            }
-        }
-        else if (move)
-        */
+    {
         if(move)
         {
             movePosition();
@@ -95,9 +79,8 @@ public class BoxController : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 10;
         moveTo = Camera.main.ScreenToWorldPoint(mousePos);
-        Debug.Log(mousePos);
-        Debug.Log(Camera.main.ScreenToWorldPoint(mousePos));
-
+        //Debug.Log(mousePos);
+        //Debug.Log(Camera.main.ScreenToWorldPoint(mousePos));
         pos.x = moveTo.x;//X方向だけ動かしすため
         transform.position = pos;
     }
@@ -131,9 +114,22 @@ public class BoxController : MonoBehaviour
     {
         comp = true;
     }
-    public void compFlase()
+    public void compFalse()
     {
         comp = false;
+    }
+    public bool distantNow()
+    {
+        return distant;
+    }
+
+    public void distantTrue()
+    {
+        distant = true;
+    }
+    public void distantFalse()
+    {
+        distant = false;
     }
 
     public void placeUp()
@@ -142,7 +138,7 @@ public class BoxController : MonoBehaviour
         transform.position = pos;
         stop = false;//動く
         move = false;//強制的に解除
-        Debug.Log("呼ばれました" + no);
+        //Debug.Log("呼ばれました" + no);
     }
 
     public void Die(int a)

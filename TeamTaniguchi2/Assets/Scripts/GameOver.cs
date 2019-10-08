@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
-    bool gameOver = false;
+    SceneChange sc;
+    bool gameOver = false;    
 
     public bool gameOverNow()
     {
@@ -14,6 +15,7 @@ public class GameOver : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         gameOver = true;
+        sc.OnRetryResult();
         Debug.Log("GameOver");
     }
 }

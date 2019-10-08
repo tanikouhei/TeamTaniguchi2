@@ -7,10 +7,6 @@ public class BoxComplete : MonoBehaviour
     BoxController bc;
     BoxController[] bcClone = new BoxController[8];
     public int boxSizeCnt = 0;
-    int boxCnt = 0;
-    int cnt = 0;
-    int time = 0;
-    int resetTime = 0;
     int[] noNow = new int[8];
     int[] boxSize = new int[8];
     bool resetAll = false;
@@ -36,7 +32,7 @@ public class BoxComplete : MonoBehaviour
 
         if (boxSizeCnt == 8)
         {
-            for (int i = 0; i < 8;i++)
+            for (int i = 0; i < 8; i++)
             {
                 if (bcClone[i] != null)
                 {
@@ -59,7 +55,7 @@ public class BoxComplete : MonoBehaviour
 
     public void SetPlaceUp()
     {
-        for(int i = 0; i < 8; i++)
+        for (int i = 0; i < 8; i++)
         {
             if (bcClone[i] != null)
             {
@@ -74,10 +70,10 @@ public class BoxComplete : MonoBehaviour
         {
             noNow[i] = 0;
             boxSize[i] = 0;
-            if(bcClone[i] != null)
-            { 
-            bcClone[i].compFlase();//falseにしてから
-            bcClone[i] = null;//初期化
+            if (bcClone[i] != null)
+            {
+                bcClone[i].compFalse();//falseにしてから
+                bcClone[i] = null;//初期化
             }
         }
         resetAll = false;
@@ -89,14 +85,25 @@ public class BoxComplete : MonoBehaviour
         Debug.LogError("リセットします");
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        bc = other.gameObject.GetComponent<BoxController>();
+        if (bc.distantNow())
+        {
+            bc.distantFalse();//ここでリセット
+            Debug.LogError("解除しました");
+        }
+    }
+
+    
     void OnTriggerStay2D(Collider2D other)
     {
         bc = other.gameObject.GetComponent<BoxController>();
         //if (bc.stopNow()))//止まっている
         {//resetこれを追加しないと途中でboxSizeCntに加算されて０にならなくなるため
-            if (bc.SetNo() != noNow[0] && bc.SetNo() != noNow[1] && bc.SetNo() != noNow[2] && 
-                bc.SetNo() != noNow[3] && bc.SetNo() != noNow[4] && bc.SetNo() != noNow[5] && 
-                bc.SetNo() != noNow[6] && bc.SetNo() != noNow[7])
+            if (bc.SetNo() != noNow[0] && bc.SetNo() != noNow[1] && bc.SetNo() != noNow[2] &&
+                bc.SetNo() != noNow[3] && bc.SetNo() != noNow[4] && bc.SetNo() != noNow[5] &&
+                bc.SetNo() != noNow[6] && bc.SetNo() != noNow[7] && !bc.distantNow())
             {//番号を読み込む時に、かぶっていなければ
                 if (noNow[0] == 0)//順番に番号とサイズの大きさを記憶
                 {
@@ -150,8 +157,8 @@ public class BoxComplete : MonoBehaviour
             }
         }
     }
-
-    void OnTriggerExit2D(Collider2D other)
+    
+    public void LoadOnTriggerExit2D(Collider2D other)
     {
         bc = other.gameObject.GetComponent<BoxController>();
         if (noNow[0] == bc.SetNo())//記憶した番号を削除
@@ -202,7 +209,8 @@ public class BoxComplete : MonoBehaviour
             boxSize[7] = 0;
             bcClone[7] = null;
         }
-        bc.compFlase();
-        //Debug.LogError("離れました:" + gameObject.name + ":" + bc.SetNo() + ":" + bc.SetBoxSize());
+        bc.compFalse();
+        bc.distantTrue();
+        Debug.LogError("離れました:" + gameObject.name + ":" + bc.SetNo() + ":" + bc.SetBoxSize());
     }
 }

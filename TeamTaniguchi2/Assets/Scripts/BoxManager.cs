@@ -11,7 +11,6 @@ public class BoxManager : MonoBehaviour
     GameOver go;
     int timeCount = 0;//(仮)
     int noCount = 0;
-    //bool placeUp = false;
 
     // Use this for initialization
     void Start ()
@@ -63,7 +62,7 @@ public class BoxManager : MonoBehaviour
     {
         for(int i = 0; i < 8; i++)
         {
-            bc[i].boxReset();
+            bc[7 - i].boxReset();
         }
     }    
 
@@ -78,14 +77,3 @@ public class BoxManager : MonoBehaviour
         return noCount;
     }
 }
-    /*
-    public bool GetPlaceUp()
-    {
-        return placeUp;
-    }
-
-    public void placeUpFalse()//placeをチェンジ
-    {
-        placeUp = false;
-    }    
-    */
