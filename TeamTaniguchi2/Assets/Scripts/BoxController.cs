@@ -92,7 +92,7 @@ public class BoxController : MonoBehaviour
             {
                 stop = false;
             }
-            pos = transform.position;
+            pos = transform.position;            
         }
 
         //if (no == 1 || no == 2)
@@ -119,7 +119,40 @@ public class BoxController : MonoBehaviour
 
     void fixedPosition()//固定position
     {
-        //if(pos.x>= 2.14)
+        if(pos.x < -2.14f)
+        {
+            pos.x = -2.47f;
+        }
+        else if(pos.x < -1.4f)
+        {
+            pos.x = -1.77f;
+        }
+        else if(pos.x < -0.7f)
+        {
+            pos.x = -1.05f;
+        }
+        else if(pos.x <= 0.0f)
+        {
+            pos.x = -0.33f;
+        }
+        else if(pos.x <= 0.74f)
+        {
+            pos.x = 0.37f;
+        }
+        else if (pos.x <= 1.45f)
+        {
+            pos.x = 1.08f;
+        }
+        else if(pos.x < 2.15f)
+        {
+            pos.x = 1.8f;
+        }
+        else if (pos.x < 2.8f)
+        {
+            pos.x = 2.49f;
+        }
+        transform.position = pos;
+        //Debug.Log("位置を変更しています");
     }
 
     public Vector3 posNow()
@@ -193,6 +226,7 @@ public class BoxController : MonoBehaviour
 
     public void PointerUp()//離したら
     {
+        fixedPosition();
         move = false;
         Debug.Log("離しました");
     }
