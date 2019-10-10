@@ -13,8 +13,8 @@ public class BoxControllerChild : MonoBehaviour
         obj = transform.parent.gameObject;
         bc = obj.GetComponent<BoxController>();
         Debug.Log(bc);
-    }
-
+    }  
+     
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Box" || other.gameObject.tag == "BoxHit")

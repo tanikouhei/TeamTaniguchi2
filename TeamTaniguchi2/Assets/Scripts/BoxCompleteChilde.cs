@@ -19,7 +19,7 @@ public class BoxCompleteChilde : MonoBehaviour
     {
         if (other.gameObject.tag == "Box")
         {
-            bc.LoadOnTriggerExit2D(other);
+            //bc.LoadOnTriggerExit2D(other);
             //Debug.LogError("離れました:" +gameObject.name);
         }
     }

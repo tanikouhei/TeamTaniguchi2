@@ -31,8 +31,7 @@ public class BoxManager : MonoBehaviour
         if (!go.gameOverNow())
         {
             timeCount++;
-
-            /*
+            
             for(int i = 0; i < 8; i++)
             {
                 if (bc[i].resetAllNow())
@@ -41,10 +40,10 @@ public class BoxManager : MonoBehaviour
                     break;
                 }
             }
-            */
 
             if (timeCount % 180 == 0)
             {
+                //Reset();
                 newGenerate();
             }
         }

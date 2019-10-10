@@ -96,9 +96,11 @@ public class BoxComplete : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Box")
-        {
-            bc = other.gameObject.GetComponent<BoxController>();
+        //if (other.gameObject.tag == "Box")
+        if (other.gameObject.name == "LeftHit")
+        {         
+            //bc = other.gameObject.GetComponent<BoxController>();
+            bc = other.transform.parent.gameObject.GetComponent<BoxController>();
             if (bc.distantNow())
             {
                 bc.distantFalse();//ここでリセット
@@ -110,9 +112,11 @@ public class BoxComplete : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Box")
+        //if (other.gameObject.tag == "Box")
+        if (other.gameObject.name == "LeftHit")
         {
-            bc = other.gameObject.GetComponent<BoxController>();
+            //bc = other.gameObject.GetComponent<BoxController>();
+            bc = other.transform.parent.gameObject.GetComponent<BoxController>();
             //if (bc.stopNow()))//止まっている
             {//resetこれを追加しないと途中でboxSizeCntに加算されて０にならなくなるため
                 if (bc.SetNo() != noNow[0] && bc.SetNo() != noNow[1] && bc.SetNo() != noNow[2] &&
@@ -173,11 +177,13 @@ public class BoxComplete : MonoBehaviour
         }
     }
 
-    public void LoadOnTriggerExit2D(Collider2D other)
+    /*public*/ void /*Load*/OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Box")
+        //if (other.gameObject.tag == "Box")        
+        if (other.gameObject.name == "LeftHit")
         {
-            bc = other.gameObject.GetComponent<BoxController>();
+            //bc = other.gameObject.GetComponent<BoxController>();
+            bc = other.transform.parent.gameObject.GetComponent<BoxController>();
             if (noNow[0] == bc.SetNo())//記憶した番号を削除
             {
                 noNow[0] = 0;
@@ -227,7 +233,7 @@ public class BoxComplete : MonoBehaviour
                 bcClone[7] = null;
             }
             bc.compFalse();
-            bc.distantTrue();
+            //bc.distantTrue();
             Debug.LogError("離れました:" + gameObject.name + ":" + bc.SetNo() + ":" + bc.SetBoxSize());
         }
     }
