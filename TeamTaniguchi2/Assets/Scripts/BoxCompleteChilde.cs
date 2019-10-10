@@ -23,5 +23,4 @@ public class BoxCompleteChilde : MonoBehaviour
             //Debug.LogError("離れました:" +gameObject.name);
         }
     }
-
 }

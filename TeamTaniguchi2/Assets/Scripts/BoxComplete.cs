@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BoxComplete : MonoBehaviour
 {
+    public AudioClip sound;
+    AudioSource audiosource;
     GameObject obj;
     BoxController bc;
     Score score;
@@ -15,6 +17,7 @@ public class BoxComplete : MonoBehaviour
 
     void Start()
     {
+        audiosource = GetComponent<AudioSource>();
         obj = GameObject.Find("GameManager");
         score = obj.GetComponent<Score>();
         for (int i = 0; i < 8; i++)
@@ -34,7 +37,7 @@ public class BoxComplete : MonoBehaviour
         //Debug.Log(gameObject.name + boxSize[0] + ":" + boxSize[1] + ":" + boxSize[2] + ":" + boxSize[3] + ":" + boxSize[4] + ":" + boxSize[5] + ":" + boxSize[6] + ":" + boxSize[7]);
         Debug.Log(gameObject.name + ":" + boxSizeCnt);
 
-        if (boxSizeCnt == 8)
+        if (boxSizeCnt >= 8)
         {
             for (int i = 0; i < 8; i++)
             {
@@ -45,6 +48,7 @@ public class BoxComplete : MonoBehaviour
                     boxSize[i] = 0;
                 }
             }
+            audiosource.PlayOneShot(sound);
             score.SetScore();//スコア追加
             resetAll = true;
             boxSizeCnt = 0;//念のためリセット
