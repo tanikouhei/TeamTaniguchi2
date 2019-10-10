@@ -32,6 +32,7 @@ public class BoxManager : MonoBehaviour
         {
             timeCount++;
 
+            /*
             for(int i = 0; i < 8; i++)
             {
                 if (bc[i].resetAllNow())
@@ -40,6 +41,7 @@ public class BoxManager : MonoBehaviour
                     break;
                 }
             }
+            */
 
             if (timeCount % 180 == 0)
             {
@@ -50,7 +52,6 @@ public class BoxManager : MonoBehaviour
 
     void newGenerate()
     {
-        //placeUp = true;
         for(int i = 0; i < 8; i++)
         {
             bc[7 - i].SetPlaceUp();

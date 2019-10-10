@@ -12,7 +12,10 @@ public class BoxController : MonoBehaviour
     Rigidbody2D rb2d;
     public int no = 0;
     int boxSize = 0;
-    //bool placeUp = false;//一個ずつ上昇
+    const float wallLeft = -2.45f;//左の壁
+    float wallRight = 0.0f;//右の壁 こっちはボックスの大きさによって変わる
+    float boxLeft = -10.0f;
+    float boxRight = 10.0f;
     bool stop = false;
     bool move = false;//移動中かどうか
     bool comp = false;//揃ったかどうか
@@ -27,22 +30,47 @@ public class BoxController : MonoBehaviour
         rb2d = this.GetComponent<Rigidbody2D>();
         no = bm.SetNoCount();
 
-        switch (gameObject.name.Substring(0, 4))
+        switch (gameObject.name.Substring(0, 7))
         {
             case "Box1":
                 boxSize = 1;
+                wallRight = 2.5f;
                 break;
             case "Box2":
                 boxSize = 2;
+                wallRight = 1.8f;
                 break;
             case "Box3":
                 boxSize = 3;
+                wallRight = 1.1f;
                 break;
             case "Box4":
                 boxSize = 4;
+                wallRight = 0.4f;
                 break;
             case "Box5":
                 boxSize = 5;
+                wallRight = -0.35f;
+                break;
+            case "BoxHit1":
+                boxSize = 1;
+                wallRight = 2.5f;
+                break;
+            case "BoxHit2":
+                boxSize = 2;
+                wallRight = 1.8f;
+                break;
+            case "BoxHit3":
+                boxSize = 3;
+                wallRight = 1.1f;
+                break;
+            case "BoxHit4":
+                boxSize = 4;
+                wallRight = 0.4f;
+                break;
+            case "BoxHit5":
+                boxSize = 5;
+                wallRight = -0.35f;
                 break;
         }
     }
@@ -80,9 +108,18 @@ public class BoxController : MonoBehaviour
         mousePos.z = 10;
         moveTo = Camera.main.ScreenToWorldPoint(mousePos);
         //Debug.Log(mousePos);
-        //Debug.Log(Camera.main.ScreenToWorldPoint(mousePos));
-        pos.x = moveTo.x;//X方向だけ動かしすため
+        //sDebug.Log(Camera.main.ScreenToWorldPoint(mousePos));
+        if (moveTo.x >= wallLeft && moveTo.x <= wallRight &&
+            moveTo.x >= boxLeft &&moveTo.x <= boxRight)
+        {
+            pos.x = moveTo.x;//X方向だけ動かしすため
+        }
         transform.position = pos;
+    }
+
+    void fixedPosition()//固定position
+    {
+        //if(pos.x>= 2.14)
     }
 
     public Vector3 posNow()
@@ -114,10 +151,12 @@ public class BoxController : MonoBehaviour
     {
         comp = true;
     }
+
     public void compFalse()
     {
         comp = false;
     }
+
     public bool distantNow()
     {
         return distant;
@@ -156,6 +195,42 @@ public class BoxController : MonoBehaviour
     {
         move = false;
         Debug.Log("離しました");
+    }
+
+    public void LoadOnTriggerEnter2D(Collider2D other,string s)
+    {
+        if (move)
+        {
+            switch (s)
+            {
+                case "LeftHit":
+                    boxLeft = pos.x;
+                    Debug.LogWarning("呼ばれました:" + boxLeft);
+                    break;
+                case "RightHit":
+                    boxRight = pos.x;
+                    Debug.LogWarning("呼ばれました:" + boxRight);
+                    break;
+            }
+        }
+    }
+
+    public void LoadOnTriggerExit2D(Collider2D other,string s)
+    {
+        if (move)
+        {
+            switch (s)
+            {
+                case "LeftHit":
+                    boxLeft = -10.0f;
+                    Debug.LogWarning("離れました:" + boxLeft);
+                    break;
+                case "RightHit":
+                    boxRight = 10.0f;
+                    Debug.LogWarning("離れました:" + boxLeft);
+                    break;
+            }
+        }
     }
 }
 /*

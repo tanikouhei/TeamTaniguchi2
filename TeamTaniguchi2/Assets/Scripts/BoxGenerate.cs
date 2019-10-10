@@ -31,7 +31,7 @@ public class BoxGenerate : MonoBehaviour
     {
         for(int i = 0; i < 5; i++)//ボックスの型(1～5の大きさ)
         {
-            box[i] = (GameObject)Resources.Load("Box" + (i + 1));//ボックスの型を読み込んで番号をつける
+            box[i] = (GameObject)Resources.Load("BoxHit" + (i + 1));//ボックスの型を読み込んで番号をつける
             box[i].transform.localScale = new Vector3(scale_x, scale_y, scale_z);//ボックスの大きさ
         }
         GenerateStart(0);//最初
