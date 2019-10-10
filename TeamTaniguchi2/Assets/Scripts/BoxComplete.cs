@@ -13,7 +13,6 @@ public class BoxComplete : MonoBehaviour
     public int boxSizeCnt = 0;
     int[] noNow = new int[8];
     int[] boxSize = new int[8];
-    bool resetAll = false;
 
     void Start()
     {
@@ -35,7 +34,7 @@ public class BoxComplete : MonoBehaviour
 
         //Debug.Log(gameObject.name + noNow[0] + ":" + noNow[1] + ":" + noNow[2] + ":" + noNow[3] + ":" + noNow[4] + ":" + noNow[5] + ":" + noNow[6] + ":" + noNow[7]);
         //Debug.Log(gameObject.name + boxSize[0] + ":" + boxSize[1] + ":" + boxSize[2] + ":" + boxSize[3] + ":" + boxSize[4] + ":" + boxSize[5] + ":" + boxSize[6] + ":" + boxSize[7]);
-        Debug.Log(gameObject.name + ":" + boxSizeCnt);
+        //Debug.Log(gameObject.name + ":" + boxSizeCnt);
 
         if (boxSizeCnt >= 8)
         {
@@ -50,16 +49,10 @@ public class BoxComplete : MonoBehaviour
             }
             audiosource.PlayOneShot(sound);
             score.SetScore();//スコア追加
-            resetAll = true;
             boxSizeCnt = 0;//念のためリセット
             Debug.LogError("リセット(box):" + gameObject.name + noNow[0] + ":" + noNow[1] + ":" + noNow[2] + ":" + noNow[3] + ":" + noNow[4] + ":" + noNow[5] + ":" + noNow[6] + ":" + noNow[7]);
             Debug.LogError("リセット(size):" + gameObject.name + boxSize[0] + ":" + boxSize[1] + ":" + boxSize[2] + ":" + boxSize[3] + ":" + boxSize[4] + ":" + boxSize[5] + ":" + boxSize[6] + ":" + boxSize[7]);
         }
-    }
-
-    public bool resetAllNow()
-    {
-        return resetAll;
     }
 
     public void SetPlaceUp()
@@ -71,57 +64,17 @@ public class BoxComplete : MonoBehaviour
                 bcClone[i].placeUp();
             }
         }
-    }
-
-    public void boxReset()//初期化
-    {
-        for (int i = 0; i < 8; i++)
-        {
-            noNow[i] = 0;
-            boxSize[i] = 0;
-            if (bcClone[i] != null)
-            {
-                bcClone[i].compFalse();//falseにしてから
-                bcClone[i] = null;//初期化
-            }
-        }
-        resetAll = false;
-        boxSizeCnt = 0;//ここで初期化
-        Debug.LogWarning("呼ばれました");
-        Debug.LogWarning(/*gameObject.name + */noNow[0] + ":" + noNow[1] + ":" + noNow[2] + ":" + noNow[3] + ":" + noNow[4] + ":" + noNow[5] + ":" + noNow[6] + ":" + noNow[7]);
-        Debug.LogWarning(/*gameObject.name + */boxSize[0] + ":" + boxSize[1] + ":" + boxSize[2] + ":" + boxSize[3] + ":" + boxSize[4] + ":" + boxSize[5] + ":" + boxSize[6] + ":" + boxSize[7]);
-        Debug.LogWarning(/*gameObject.name + ":" + */boxSizeCnt);
-        Debug.LogError("リセットします");
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        //if (other.gameObject.tag == "Box")
-        if (other.gameObject.name == "LeftHit")
-        {         
-            //bc = other.gameObject.GetComponent<BoxController>();
-            bc = other.transform.parent.gameObject.GetComponent<BoxController>();
-            if (bc.distantNow())
-            {
-                bc.distantFalse();//ここでリセット
-                Debug.LogError("解除しました");
-            }
-        }
-    }
-
-
+    }    
+    
     void OnTriggerStay2D(Collider2D other)
     {
-        //if (other.gameObject.tag == "Box")
         if (other.gameObject.name == "LeftHit")
         {
-            //bc = other.gameObject.GetComponent<BoxController>();
             bc = other.transform.parent.gameObject.GetComponent<BoxController>();
-            //if (bc.stopNow()))//止まっている
             {//resetこれを追加しないと途中でboxSizeCntに加算されて０にならなくなるため
                 if (bc.SetNo() != noNow[0] && bc.SetNo() != noNow[1] && bc.SetNo() != noNow[2] &&
                     bc.SetNo() != noNow[3] && bc.SetNo() != noNow[4] && bc.SetNo() != noNow[5] &&
-                    bc.SetNo() != noNow[6] && bc.SetNo() != noNow[7] && !bc.distantNow())
+                    bc.SetNo() != noNow[6] && bc.SetNo() != noNow[7])
                 {//番号を読み込む時に、かぶっていなければ
                     if (noNow[0] == 0)//順番に番号とサイズの大きさを記憶
                     {
@@ -177,12 +130,10 @@ public class BoxComplete : MonoBehaviour
         }
     }
 
-    /*public*/ void /*Load*/OnTriggerExit2D(Collider2D other)
-    {
-        //if (other.gameObject.tag == "Box")        
+    void OnTriggerExit2D(Collider2D other)
+    {       
         if (other.gameObject.name == "LeftHit")
         {
-            //bc = other.gameObject.GetComponent<BoxController>();
             bc = other.transform.parent.gameObject.GetComponent<BoxController>();
             if (noNow[0] == bc.SetNo())//記憶した番号を削除
             {
@@ -233,8 +184,7 @@ public class BoxComplete : MonoBehaviour
                 bcClone[7] = null;
             }
             bc.compFalse();
-            //bc.distantTrue();
-            Debug.LogError("離れました:" + gameObject.name + ":" + bc.SetNo() + ":" + bc.SetBoxSize());
+            //Debug.LogError("離れました:" + gameObject.name + ":" + bc.SetNo() + ":" + bc.SetBoxSize());
         }
     }
 }

@@ -19,7 +19,6 @@ public class BoxController : MonoBehaviour
     bool stop = false;
     bool move = false;//移動中かどうか
     bool comp = false;//揃ったかどうか
-    bool distant = false;//離れたかどうか
 
     // Use this for initialization
     void Start()
@@ -94,12 +93,6 @@ public class BoxController : MonoBehaviour
             }
             pos = transform.position;            
         }
-
-        //if (no == 1 || no == 2)
-        {
-            //Debug.Log("stop:send: " + stop + send);
-        }
-        //Debug.Log("Box" + no + "pos : 場所"+ pos + " " +transform.position);
     }
     
     void movePosition()
@@ -188,22 +181,8 @@ public class BoxController : MonoBehaviour
     public void compFalse()
     {
         comp = false;
-    }
-
-    public bool distantNow()
-    {
-        return distant;
-    }
-
-    public void distantTrue()
-    {
-        distant = true;
-    }
-    public void distantFalse()
-    {
-        distant = false;
-    }
-
+    }    
+    
     public void placeUp()
     {
         pos.y += 0.71f;
@@ -267,58 +246,3 @@ public class BoxController : MonoBehaviour
         }
     }
 }
-/*
-    public bool SetSend()
-    {
-        return send;
-    }
-
-    public void sendTrue()
-    {
-        send = true;
-    }
-
-    public void sendFalse()
-    {
-        send = false;
-    }
-/*
-    void OnCollisionStay2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Box" || other.gameObject.tag == "Block")
-        {
-            stop = true;
-            Debug.Log("止まっています:" + stop);
-        }
-    }
-    */
-
-/*
- void OnCollisionExit2D(Collision2D other)
- {
-     if (other.gameObject.tag == "Box" || other.gameObject.tag == "Block")
-     {
-         stop = false;
-         send = false;
-         Debug.Log("ブロックが落ちていますNO" + no + " stop:" + stop + " send:" + send);
-     }
- }
-/*
-void OnTriggerStay2D(Collider2D other)
-{
- bc = other.gameObject.GetComponent<BoxComplete>();
- if (other.gameObject.tag == "Line" && stop && !send)
- {
-     bc.SetBox(box);
-     send = true;
- }
-}
-void OnTriggerEnter2D(Collider2D other)
-{
- bc = other.gameObject.GetComponent<BoxComplete>();
- if (other.gameObject.tag == "Line")
- {
-     send = false;
- }
-}
-*/

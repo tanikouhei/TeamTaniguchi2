@@ -6,14 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-    GameObject obj;
     SceneChange sc;
     bool gameOver = false;    
 
     void Start()
     {
-        obj = GameObject.Find("GameManager");
-        sc = obj.GetComponent<SceneChange>();
+        sc = GetComponent<SceneChange>();
     }
 
     public bool gameOverNow()
